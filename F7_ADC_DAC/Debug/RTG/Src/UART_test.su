@@ -1,0 +1,2 @@
+../RTG/Src/UART_test.c:6:5:test_transmit_receive_data	8	static
+../RTG/Src/UART_test.c:23:5:UART_tests	16	static

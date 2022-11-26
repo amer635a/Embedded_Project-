@@ -1,0 +1,91 @@
+/*
+ * RTG.h
+ *
+ *  Created on: Oct 2, 2022
+ *      Author: RTG
+ *
+ */
+#ifndef INC_RTG_H_
+#define INC_RTG_H_
+#include "main.h"
+#include "lwip.h"
+#include "stm32f7xx_hal.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+extern UART_HandleTypeDef huart3;
+extern UART_HandleTypeDef huart4;		//Change to match your UART number
+extern UART_HandleTypeDef huart5;		//Change to match your UART number
+
+extern SPI_HandleTypeDef hspi1;
+extern SPI_HandleTypeDef hspi2;
+
+#define UART_4 &huart4				    //Change to match your UART number
+#define UART_5 &huart5				    //Change to match your UART number
+
+
+
+extern DAC_HandleTypeDef hdac;
+extern ADC_HandleTypeDef hadc1;
+extern TIM_HandleTypeDef htim2;
+
+extern I2C_HandleTypeDef hi2c1;
+extern I2C_HandleTypeDef hi2c2;
+
+#define END_OF_STRING 0
+#define BACKSPACE 8
+#define LINE_FEED 10
+#define CARRIAGE_RETURN 13
+
+#define UART_DEBUG &huart3
+#define DAC_1 &hdac
+#define ADC_1 &hadc1
+#define TIM_2 &htim2
+#define I2C_1 &hi2c1
+#define I2C_2 &hi2c2
+
+#define TRUE 1
+#define FALSE 0
+#define SIZEOF_DATA_BUFF  18
+#define TIMEOUT_TIME_100 100
+
+#define TEST_DAC_ADC '5'
+#define TEST_UART '1'
+#define DEFAULT_TRANSMIT_NUMBER 1000
+#define TEST_TYPE_DEFAULT_VALUE -1
+
+extern int adc_flag ; //flag for ADC Interrupt
+extern uint8_t receivere_UART5_flag_RxCpltCallback;
+
+extern uint8_t data_buff_transmint[SIZEOF_DATA_BUFF];
+extern uint8_t data_buff_receivere[SIZEOF_DATA_BUFF];
+
+
+#define GPIO_PER_1 GPIOB
+#define GPIO_PER_2 GPIOB
+#define GPIO_PER_3 GPIOB
+#define GPIO_PER_4 GPIOC
+#define GPIO_LED_1 LD1_Pin
+#define GPIO_LED_2 LD2_Pin
+#define GPIO_LED_3 LD3_Pin
+
+#define SPI_1 &hspi1
+#define SPI_2 &hspi2
+
+#define SPI_MASTER SPI_1
+#define SPI_SLAVE  SPI_2
+
+#define SERVER_PORT 7
+extern struct netif gnetif;	//Generic data structure used for all lwIP network interfaces.
+
+#define END_OF_STRING 0
+#define BACKSPACE 8
+#define LINE_FEED 10
+#define CARRIAGE_RETURN 13
+
+extern flag_message_From_client;
+
+void rtg_main();
+
+#endif /* INC_RTG_H_ */

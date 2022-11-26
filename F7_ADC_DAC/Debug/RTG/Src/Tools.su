@@ -1,0 +1,4 @@
+../RTG/Src/Tools.c:5:5:__io_putchar	16	static
+../RTG/Src/Tools.c:10:5:_write	24	static
+../RTG/Src/Tools.c:16:5:__io_getchar	16	static
+../RTG/Src/Tools.c:23:5:_read	40	static
