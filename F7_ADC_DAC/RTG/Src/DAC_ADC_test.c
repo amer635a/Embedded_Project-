@@ -10,7 +10,7 @@ int test_analog_to_digital(){
 		adc_flag = FALSE;
 	}
 
-	return TRUE;
+	return TRUE  ;
 }
 
 
