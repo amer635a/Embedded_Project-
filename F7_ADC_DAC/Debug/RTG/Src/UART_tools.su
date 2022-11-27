@@ -1,2 +1,0 @@
-../RTG/Src/UART_tools.c:10:6:initialization_UART	8	static
-../RTG/Src/UART_tools.c:23:6:HAL_UART_RxCpltCallback	16	static

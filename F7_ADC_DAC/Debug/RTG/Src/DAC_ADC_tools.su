@@ -1,2 +1,1 @@
 ../RTG/Src/DAC_ADC_tools.c:7:6:initialization_DAC	16	static
-../RTG/Src/DAC_ADC_tools.c:18:6:HAL_ADC_ConvCpltCallback	16	static

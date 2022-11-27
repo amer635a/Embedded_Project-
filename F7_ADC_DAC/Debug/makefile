@@ -71,8 +71,8 @@ all: main-build
 main-build: F7_ADC_DAC.elf secondary-outputs
 
 # Tool invocations
-F7_ADC_DAC.elf F7_ADC_DAC.map: $(OBJS) $(USER_OBJS) C:\Users\ameer\git\Embedded_Project-\F7_ADC_DAC\STM32F746ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "F7_ADC_DAC.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\ameer\git\Embedded_Project-\F7_ADC_DAC\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="F7_ADC_DAC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+F7_ADC_DAC.elf F7_ADC_DAC.map: $(OBJS) $(USER_OBJS) C:\Users\ameer\Desktop\RealTime\ Course\Arm\ -\ Embedded\F7_ADC_DAC\STM32F746ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "F7_ADC_DAC.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\ameer\Desktop\RealTime Course\Arm - Embedded\F7_ADC_DAC\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="F7_ADC_DAC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

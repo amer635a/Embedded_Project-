@@ -1,6 +1,22 @@
 #include "RTG.h"
 
 
+void print_result_test( result_test result){
+	printf("\r\n result -> %s \r\n", result.msg);
+}
+
+
+uint8_t check_data(const char* data,const char* data_buff_receiver1,uint8_t lenght){
+
+	for (uint8_t i = 0; i < lenght ;i++ )
+	{
+		if( *(data+i)!=*(data_buff_receiver1+i) )
+			return FALSE;
+	}
+
+	return TRUE;
+}
+
 // printf
 int __io_putchar(int ch) {
 	HAL_UART_Transmit(UART_DEBUG, (uint8_t*) &ch, 1, 0xFFFF);

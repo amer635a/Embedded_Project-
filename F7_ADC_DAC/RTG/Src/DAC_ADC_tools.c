@@ -14,7 +14,4 @@ void initialization_DAC(int transmit_number)
 }
 
 
-// ADC interrupt Callback (convert data finish)
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
-	adc_flag = TRUE;
-}
+

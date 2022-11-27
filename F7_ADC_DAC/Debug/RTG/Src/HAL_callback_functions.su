@@ -1,0 +1,5 @@
+../RTG/Src/HAL_callback_functions.c:22:6:HAL_UART_RxCpltCallback	16	static
+../RTG/Src/HAL_callback_functions.c:31:6:HAL_I2C_SlaveRxCpltCallback	16	static
+../RTG/Src/HAL_callback_functions.c:35:6:HAL_I2C_MasterRxCpltCallback	16	static
+../RTG/Src/HAL_callback_functions.c:41:6:HAL_ADC_ConvCpltCallback	16	static
+../RTG/Src/HAL_callback_functions.c:47:6:HAL_TIM_PeriodElapsedCallback	16	static

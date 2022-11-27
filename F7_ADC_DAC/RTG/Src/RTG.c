@@ -12,13 +12,11 @@
  *	Port:		7 (recommended 50,000+)
  */
 
-void rtg_main() {
+void rtg_main()    {
 	printf("Start of program\n\r");
 	udpServer_init();					//UDP server initialization
 	while (1) {
 		handle_reception_network();
-
-
 
 	}
 }
