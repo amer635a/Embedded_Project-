@@ -89,6 +89,7 @@ extern uint8_t data_buff_receivere[SIZEOF_DATA_BUFF];
 #define SPI_MASTER SPI_1
 #define SPI_SLAVE  SPI_2
 
+
 #define SERVER_PORT 7
 extern struct netif gnetif;	//Generic data structure used for all lwIP network interfaces.
 

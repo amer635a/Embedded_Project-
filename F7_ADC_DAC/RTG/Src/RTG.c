@@ -14,45 +14,54 @@
  *
  **********************************************/
 
-uint8_t data_from_spi1=0;
+uint8_t data_from_spi1='A';
 uint8_t data_to_spi2=0;
 
-void rtg_main() {
-	HAL_SPI_Receive_IT(SPI_2, &data_from_spi1, 1);
-	while (1) {
-		data_to_spi2++;
-		data_to_spi2 %= 255;
-		HAL_SPI_Transmit(SPI_1, &data_to_spi2, 1, 100); //master initiates a byte of data to slave with address 44
+uint8_t data_R_master[10]={0};
+uint8_t data_R_slave[10]={0};
+uint8_t send_data[10]="ameer 665";
+uint8_t flag_R_master_SPI=FALSE;
+uint8_t flag_R_slave_SPI=FALSE;
 
-		switch (data_from_spi1 % 3) {
-		case 0:
-			// Toggle led 1
-			HAL_GPIO_TogglePin(GPIO_PER_1, GPIO_LED_1);
-			break;
+void rtg_main()
+{
+	printf("\r\n * start * \r\n");
 
-		case 1:
-			// Toggle led 2
-			HAL_GPIO_TogglePin(GPIO_PER_1, GPIO_LED_2);
-			break;
-
-		case 2:
-			// Toggle led 3
-			HAL_GPIO_TogglePin(GPIO_PER_1, GPIO_LED_3);
-			break;
-
-		default:
-			// Error message
-			printf("ERROR\r\n");
+	HAL_SPI_Receive_IT(SPI_SLAVE, data_R_slave, 10);
+//	HAL_SPI_Receive_IT(SPI_SLAVE, &data_from_spi1, 1);
+	HAL_SPI_Transmit(SPI_MASTER,send_data, 10,100 );
+	//HAL_SPI_Transmit(SPI_MASTER, &data_to_spi2, 1, 100);
+	while (1)
+	{
+		if(flag_R_slave_SPI==TRUE)
+		{
+			printf("\r\n flag_R_slave_SPI->%s \r\n",data_R_slave);
+			 HAL_SPI_Receive_IT(SPI_MASTER, data_R_master, 10);
+			 HAL_SPI_Transmit (SPI_SLAVE,(uint8_t*)"ameer 665", 10,100);
+			 SPI_SLAVE.
+			flag_R_slave_SPI=FALSE;
 		}
-		printf("We got %d from SPI \n\r", data_from_spi1);
-		HAL_Delay(1000);
+
+		if(flag_R_master_SPI==TRUE)
+		{
+			printf("\r\n flag_R_master_SPI->%s \r\n ");
+			flag_R_master_SPI=FALSE;
+		}
+
+
+
+
 	}
 }
 
 void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hspi) {
-	if (hspi == SPI_2) {
-		HAL_SPI_Receive_IT(SPI_2, &data_from_spi1, 1);
+	if (hspi == SPI_SLAVE) {
+		flag_R_slave_SPI=TRUE;
+		HAL_SPI_Receive_IT(SPI_SLAVE, &data_from_spi1, 1);
 	}
+	if (hspi == SPI_MASTER) {
+		flag_R_master_SPI=TRUE;
+		}
 }
 /*
  void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi);

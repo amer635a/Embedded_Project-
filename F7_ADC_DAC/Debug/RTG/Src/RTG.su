@@ -1,2 +1,2 @@
-../RTG/Src/RTG.c:20:6:rtg_main	8	static
-../RTG/Src/RTG.c:52:6:HAL_SPI_RxCpltCallback	16	static
+../RTG/Src/RTG.c:26:6:rtg_main	8	static
+../RTG/Src/RTG.c:54:6:HAL_SPI_RxCpltCallback	16	static
