@@ -1,8 +1,5 @@
 #include "RTG.h"
 
-
-
-
 result_test analog_to_digital_converter_test()
 {
 	result_test result;

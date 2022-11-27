@@ -1,2 +1,2 @@
-../RTG/Src/ADC_test.c:6:13:analog_to_digital_converter_test	96	static
-../RTG/Src/ADC_test.c:34:6:ADC_tests	88	static
+../RTG/Src/ADC_test.c:3:13:analog_to_digital_converter_test	96	static
+../RTG/Src/ADC_test.c:31:6:ADC_tests	88	static

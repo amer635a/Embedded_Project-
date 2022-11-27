@@ -11,6 +11,7 @@ C_SRCS += \
 ../RTG/Src/HAL_callback_functions.c \
 ../RTG/Src/I2C_test.c \
 ../RTG/Src/RTG.c \
+../RTG/Src/SPI_test.c \
 ../RTG/Src/Tools.c \
 ../RTG/Src/UART_test.c \
 ../RTG/Src/myMessage_tools.c \
@@ -24,6 +25,7 @@ OBJS += \
 ./RTG/Src/HAL_callback_functions.o \
 ./RTG/Src/I2C_test.o \
 ./RTG/Src/RTG.o \
+./RTG/Src/SPI_test.o \
 ./RTG/Src/Tools.o \
 ./RTG/Src/UART_test.o \
 ./RTG/Src/myMessage_tools.o \
@@ -37,6 +39,7 @@ C_DEPS += \
 ./RTG/Src/HAL_callback_functions.d \
 ./RTG/Src/I2C_test.d \
 ./RTG/Src/RTG.d \
+./RTG/Src/SPI_test.d \
 ./RTG/Src/Tools.d \
 ./RTG/Src/UART_test.d \
 ./RTG/Src/myMessage_tools.d \
@@ -51,7 +54,7 @@ RTG/Src/%.o RTG/Src/%.su: ../RTG/Src/%.c RTG/Src/subdir.mk
 clean: clean-RTG-2f-Src
 
 clean-RTG-2f-Src:
-	-$(RM) ./RTG/Src/ADC_test.d ./RTG/Src/ADC_test.o ./RTG/Src/ADC_test.su ./RTG/Src/DAC_ADC_test.d ./RTG/Src/DAC_ADC_test.o ./RTG/Src/DAC_ADC_test.su ./RTG/Src/DAC_ADC_tools.d ./RTG/Src/DAC_ADC_tools.o ./RTG/Src/DAC_ADC_tools.su ./RTG/Src/HAL_callback_functions.d ./RTG/Src/HAL_callback_functions.o ./RTG/Src/HAL_callback_functions.su ./RTG/Src/I2C_test.d ./RTG/Src/I2C_test.o ./RTG/Src/I2C_test.su ./RTG/Src/RTG.d ./RTG/Src/RTG.o ./RTG/Src/RTG.su ./RTG/Src/Tools.d ./RTG/Src/Tools.o ./RTG/Src/Tools.su ./RTG/Src/UART_test.d ./RTG/Src/UART_test.o ./RTG/Src/UART_test.su ./RTG/Src/myMessage_tools.d ./RTG/Src/myMessage_tools.o ./RTG/Src/myMessage_tools.su ./RTG/Src/server_ETH._tools.d ./RTG/Src/server_ETH._tools.o ./RTG/Src/server_ETH._tools.su ./RTG/Src/timer_test.d ./RTG/Src/timer_test.o ./RTG/Src/timer_test.su
+	-$(RM) ./RTG/Src/ADC_test.d ./RTG/Src/ADC_test.o ./RTG/Src/ADC_test.su ./RTG/Src/DAC_ADC_test.d ./RTG/Src/DAC_ADC_test.o ./RTG/Src/DAC_ADC_test.su ./RTG/Src/DAC_ADC_tools.d ./RTG/Src/DAC_ADC_tools.o ./RTG/Src/DAC_ADC_tools.su ./RTG/Src/HAL_callback_functions.d ./RTG/Src/HAL_callback_functions.o ./RTG/Src/HAL_callback_functions.su ./RTG/Src/I2C_test.d ./RTG/Src/I2C_test.o ./RTG/Src/I2C_test.su ./RTG/Src/RTG.d ./RTG/Src/RTG.o ./RTG/Src/RTG.su ./RTG/Src/SPI_test.d ./RTG/Src/SPI_test.o ./RTG/Src/SPI_test.su ./RTG/Src/Tools.d ./RTG/Src/Tools.o ./RTG/Src/Tools.su ./RTG/Src/UART_test.d ./RTG/Src/UART_test.o ./RTG/Src/UART_test.su ./RTG/Src/myMessage_tools.d ./RTG/Src/myMessage_tools.o ./RTG/Src/myMessage_tools.su ./RTG/Src/server_ETH._tools.d ./RTG/Src/server_ETH._tools.o ./RTG/Src/server_ETH._tools.su ./RTG/Src/timer_test.d ./RTG/Src/timer_test.o ./RTG/Src/timer_test.su
 
 .PHONY: clean-RTG-2f-Src
 

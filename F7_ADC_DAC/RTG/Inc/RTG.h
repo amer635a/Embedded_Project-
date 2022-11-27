@@ -102,6 +102,18 @@ extern struct netif gnetif;	//Generic data structure used for all lwIP network i
 
 extern flag_message_From_client;
 
+
+extern ip_addr_t *addr_global;
+extern u32_t addr_int;
+extern u16_t port_global;
+extern struct pbuf *p_global;
+extern const char* remoteIP_global;
+extern struct pbuf *txBuf;
+extern struct udp_pcb *upcb_global;
+
+
+
+
 typedef struct result_test
 {
 	uint8_t bool_test;

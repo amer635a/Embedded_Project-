@@ -1,7 +1,4 @@
-../RTG/Src/server_ETH._tools.c:16:6:save_client_data	16	static
-../RTG/Src/server_ETH._tools.c:25:6:send_to_cient	112	static
-../RTG/Src/server_ETH._tools.c:64:5:initialization_receive_client_message	16	static
-../RTG/Src/server_ETH._tools.c:76:6:udp_receive_callback	32	static
-../RTG/Src/server_ETH._tools.c:98:6:udpServer_init	16	static
-../RTG/Src/server_ETH._tools.c:112:14:run_client_test	128	static
-../RTG/Src/server_ETH._tools.c:172:6:handle_reception_network	136	static
+../RTG/Src/server_ETH._tools.c:14:6:send_to_cient	120	static
+../RTG/Src/server_ETH._tools.c:55:5:handleMessageFromClient	16	static
+../RTG/Src/server_ETH._tools.c:69:14:run_client_test	136	static
+../RTG/Src/server_ETH._tools.c:139:6:handle_reception_network	136	static

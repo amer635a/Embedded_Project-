@@ -122,6 +122,7 @@
 "./RTG/Src/HAL_callback_functions.o"
 "./RTG/Src/I2C_test.o"
 "./RTG/Src/RTG.o"
+"./RTG/Src/SPI_test.o"
 "./RTG/Src/Tools.o"
 "./RTG/Src/UART_test.o"
 "./RTG/Src/myMessage_tools.o"
