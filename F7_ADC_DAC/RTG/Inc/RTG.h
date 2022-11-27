@@ -51,7 +51,7 @@ extern I2C_HandleTypeDef hi2c2;
 #define Test_TIMER 1
 #define TEST_UART  2
 #define TEST_SPI   4
-#define TEST_I2C   5
+#define TEST_I2C   8
 #define TEST_ADC   16
 
 #define DEFAULT_TRANSMIT_NUMBER 1000
