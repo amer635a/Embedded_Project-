@@ -1,12 +1,7 @@
-/*
- * RTG.h
- *
- *  Created on: Oct 2, 2022
- *      Author: RTG
- *
- */
-#ifndef INC_RTG_H_
-#define INC_RTG_H_
+
+#ifndef INC_RTG_H1_
+#define INC_RTG_H1_
+
 #include "main.h"
 #include "lwip.h"
 #include "stm32f7xx_hal.h"
@@ -122,4 +117,5 @@ typedef struct result_test
 
 void rtg_main();
 
-#endif /* INC_RTG_H_ */
+#endif
+
