@@ -1,2 +1,0 @@
-../RTG/Src/I2C_test.c:12:13:test_transmit_receive_data_I2C	96	static
-../RTG/Src/I2C_test.c:66:6:I2C_tests	96	static

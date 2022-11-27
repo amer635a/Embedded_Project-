@@ -118,7 +118,6 @@ typedef struct result_test
 {
 	uint8_t bool_test;
 	uint8_t  msg[50];
-
 } result_test;
 
 void rtg_main();

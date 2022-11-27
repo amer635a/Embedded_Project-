@@ -30,9 +30,5 @@ result_test analog_to_digital_converter_test()
 
 void ADC_tests( result_test*result)
 {
-
-	HAL_UART_Transmit(UART_DEBUG, "start initialization", 21, TIMEOUT_TIME_100);
-
 	*result=analog_to_digital_converter_test();
-
 }

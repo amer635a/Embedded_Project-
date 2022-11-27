@@ -8,9 +8,6 @@ result_test result;
 my_message receive_client_message;
 
 
-
-
-
 void send_to_cient(my_message receive_client_message )
 {
 
