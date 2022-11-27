@@ -3,7 +3,7 @@
 
 flag_message_From_client=FALSE;
 //flag_message_From_client=TRUE;
-
+result_test result;
 
 my_message receive_client_message;
 
@@ -29,8 +29,7 @@ void send_to_cient(my_message receive_client_message )
 	}
 
 	addr_global->addr=16885952;
-	printf("\r\n addr_global:->%d \r\n",addr_global->addr);
-	printf("\r\n port_global:->%d \r\n",port_global);
+
 
 	/* allocate pbuf from RAM*/
 	txBuf = pbuf_alloc(PBUF_TRANSPORT,14, PBUF_RAM);
@@ -54,17 +53,15 @@ void send_to_cient(my_message receive_client_message )
 
 int handleMessageFromClient(struct pbuf *p)
 {
-	receive_client_message.id= *(uint8_t *)(p->payload + 0);
-	receive_client_message.Peripheral= *(uint8_t *)(p->payload + 1);
-	receive_client_message.Iterations= *(uint8_t *)(p->payload + 2);
-	receive_client_message.length= *(uint8_t *)(p->payload + 3);
+	receive_client_message.id= *(uint8_t *)(p->payload + my_message_id_index);
+	receive_client_message.Peripheral= *(uint8_t *)(p->payload + my_message_Peripheral_index);
+	receive_client_message.Iterations= *(uint8_t *)(p->payload + my_message_Iterations_index);
+	receive_client_message.length= *(uint8_t *)(p->payload + my_message_length_index);
 
-	memcpy(receive_client_message.msg , (p->payload + 4),  receive_client_message.length);
+	memcpy(receive_client_message.msg , (p->payload + my_message_msg_index),  receive_client_message.length);
 
-	return 4+receive_client_message.length;
+	return my_message_msg_index+receive_client_message.length;
 }
-
-
 
 result_test  run_client_test(my_message receive_client_message)
 {
@@ -134,8 +131,6 @@ result_test  run_client_test(my_message receive_client_message)
 	return result;
 }
 
-
-result_test result;
 void handle_reception_network()
 {
 	//Handles the actual reception of bytes from the network interface
