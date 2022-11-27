@@ -1,5 +1,6 @@
 
 #include "RTG.h"
+#include "tests.h"
 
 void timer_test( result_test*result)
 {

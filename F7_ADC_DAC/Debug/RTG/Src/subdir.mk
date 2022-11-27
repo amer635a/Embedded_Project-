@@ -8,21 +8,18 @@ C_SRCS += \
 ../RTG/Src/HAL_callback_functions.c \
 ../RTG/Src/RTG.c \
 ../RTG/Src/Tools.c \
-../RTG/Src/myMessage_tools.c \
 ../RTG/Src/server_ETH._tools.c 
 
 OBJS += \
 ./RTG/Src/HAL_callback_functions.o \
 ./RTG/Src/RTG.o \
 ./RTG/Src/Tools.o \
-./RTG/Src/myMessage_tools.o \
 ./RTG/Src/server_ETH._tools.o 
 
 C_DEPS += \
 ./RTG/Src/HAL_callback_functions.d \
 ./RTG/Src/RTG.d \
 ./RTG/Src/Tools.d \
-./RTG/Src/myMessage_tools.d \
 ./RTG/Src/server_ETH._tools.d 
 
 
@@ -33,7 +30,7 @@ RTG/Src/%.o RTG/Src/%.su: ../RTG/Src/%.c RTG/Src/subdir.mk
 clean: clean-RTG-2f-Src
 
 clean-RTG-2f-Src:
-	-$(RM) ./RTG/Src/HAL_callback_functions.d ./RTG/Src/HAL_callback_functions.o ./RTG/Src/HAL_callback_functions.su ./RTG/Src/RTG.d ./RTG/Src/RTG.o ./RTG/Src/RTG.su ./RTG/Src/Tools.d ./RTG/Src/Tools.o ./RTG/Src/Tools.su ./RTG/Src/myMessage_tools.d ./RTG/Src/myMessage_tools.o ./RTG/Src/myMessage_tools.su ./RTG/Src/server_ETH._tools.d ./RTG/Src/server_ETH._tools.o ./RTG/Src/server_ETH._tools.su
+	-$(RM) ./RTG/Src/HAL_callback_functions.d ./RTG/Src/HAL_callback_functions.o ./RTG/Src/HAL_callback_functions.su ./RTG/Src/RTG.d ./RTG/Src/RTG.o ./RTG/Src/RTG.su ./RTG/Src/Tools.d ./RTG/Src/Tools.o ./RTG/Src/Tools.su ./RTG/Src/server_ETH._tools.d ./RTG/Src/server_ETH._tools.o ./RTG/Src/server_ETH._tools.su
 
 .PHONY: clean-RTG-2f-Src
 

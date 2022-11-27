@@ -1,7 +1,5 @@
 #include "RTG.h"
-
-	//Prepare Receive UART to receive data
-	//HAL_UART_Receive_IT(UART_5, data_buff_receiver1, SIZEOF_DATA_BUFF);
+#include "tests.h"
 
 
 uint8_t data_buff_receiver2[SIZEOF_DATA_BUFF];
@@ -15,7 +13,6 @@ result_test test_transmit_receive_data(const char* data,uint8_t lenght){
 	result_test result;
 	//Prepare Receive UART to receive data
 	HAL_UART_Receive_IT(UART_5, data_buff_receiver1, lenght);
-
 	HAL_UART_Transmit_IT(UART_4, data, lenght);
 
 
@@ -26,7 +23,7 @@ result_test test_transmit_receive_data(const char* data,uint8_t lenght){
 			if( check_data(data,data_buff_receiver1,lenght)==FALSE )
 			{
 				result.bool_test=FALSE;
-				memcpy(result.msg , "URT-5, bad receive data",  24);
+				memcpy(result.msg , STR_FAIL_UART5_RECEIVE, strlen(STR_FAIL_UART5_RECEIVE)+1);
 				return result;
 			}
 			HAL_UART_Receive_IT(UART_4, data_buff_receiver2, lenght);
@@ -42,7 +39,7 @@ result_test test_transmit_receive_data(const char* data,uint8_t lenght){
 			if( check_data(data,data_buff_receiver1,lenght)==FALSE )
 			{
 				result.bool_test=FALSE;
-				memcpy(result.msg , "URT-4, bad receive data",  24);
+				memcpy(result.msg , STR_FAIL_UART4_RECEIVE,  strlen(STR_FAIL_UART4_RECEIVE)+1);
 				return result;
 			}
 			receivere_UART4_flag_RxCpltCallback= FALSE;
@@ -53,14 +50,14 @@ result_test test_transmit_receive_data(const char* data,uint8_t lenght){
 		if((++waiting_counter) > MAX_WAITING_COUNTER)
 		{
 			result.bool_test=FALSE;
-			memcpy(result.msg , "bad conotion between UART",  26);
+			memcpy(result.msg , STR_FAIL_TIMEOUT,  strlen(STR_FAIL_TIMEOUT)+1 );
 			return result;
 		}
 
 	}
 	printf("\r\n  end \r\n");
 	result.bool_test=TRUE;
-	memcpy(result.msg , "Success",  8);
+	memcpy(result.msg , STR_SUCCESS,  strlen(STR_SUCCESS)+1);
 
 	return result;
 

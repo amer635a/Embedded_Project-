@@ -1,4 +1,5 @@
 #include "RTG.h"
+#include "tests.h"
 
 
 

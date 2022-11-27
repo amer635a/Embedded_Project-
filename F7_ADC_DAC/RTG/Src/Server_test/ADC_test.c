@@ -1,4 +1,5 @@
 #include "RTG.h"
+#include "tests.h"
 
 result_test analog_to_digital_converter_test()
 {
@@ -16,12 +17,12 @@ result_test analog_to_digital_converter_test()
 	if(expected_adc_value-100 < adcVal1 && adcVal1 < expected_adc_value+100 )
 	{
 		result.bool_test=TRUE;
-		memcpy(result.msg , "Success",  8);
+		memcpy(result.msg , STR_SUCCESS,  strlen(STR_SUCCESS)+1 );
 	}
 	else
 	{
 		result.bool_test=FALSE;
-		memcpy(result.msg , "URT-4, bad receive data",  24);
+		memcpy(result.msg , STR_ADC_FAIL,  strlen(STR_ADC_FAIL)+1);
 	}
 	return result;
 }
