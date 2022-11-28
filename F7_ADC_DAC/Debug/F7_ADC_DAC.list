@@ -61866,10 +61866,10 @@ result_test  run_client_test(my_message receive_client_message)
  8016ae8:	08016b25 	.word	0x08016b25
  8016aec:	08016ef3 	.word	0x08016ef3
  8016af0:	08016cb9 	.word	0x08016cb9
- 8016af4:	08016bef 	.word	0x08016bef
+ 8016af4:	08016ef3 	.word	0x08016ef3
  8016af8:	08016ef3 	.word	0x08016ef3
  8016afc:	08016ef3 	.word	0x08016ef3
- 8016b00:	08016ef3 	.word	0x08016ef3
+ 8016b00:	08016bef 	.word	0x08016bef
  8016b04:	08016ef3 	.word	0x08016ef3
  8016b08:	08016ef3 	.word	0x08016ef3
  8016b0c:	08016ef3 	.word	0x08016ef3
@@ -62510,17 +62510,18 @@ result_test analog_to_digital_converter_test()
  8017024:	f7eb faef 	bl	8002606 <HAL_ADC_GetValue>
  8017028:	6438      	str	r0, [r7, #64]	; 0x40
 
-	if(expected_adc_value-100 < adcVal1 && adcVal1 < expected_adc_value+100 )
+
+	if(expected_adc_value-100 > adcVal1 || adcVal1 > expected_adc_value+100 )
  801702a:	6c7b      	ldr	r3, [r7, #68]	; 0x44
  801702c:	3b64      	subs	r3, #100	; 0x64
  801702e:	6c3a      	ldr	r2, [r7, #64]	; 0x40
  8017030:	429a      	cmp	r2, r3
- 8017032:	d90f      	bls.n	8017054 <analog_to_digital_converter_test+0x4c>
+ 8017032:	d304      	bcc.n	801703e <analog_to_digital_converter_test+0x36>
  8017034:	6c7b      	ldr	r3, [r7, #68]	; 0x44
  8017036:	3364      	adds	r3, #100	; 0x64
  8017038:	6c3a      	ldr	r2, [r7, #64]	; 0x40
  801703a:	429a      	cmp	r2, r3
- 801703c:	d20a      	bcs.n	8017054 <analog_to_digital_converter_test+0x4c>
+ 801703c:	d90a      	bls.n	8017054 <analog_to_digital_converter_test+0x4c>
 	{
 		result.bool_test=TRUE;
  801703e:	2301      	movs	r3, #1
@@ -62539,7 +62540,7 @@ result_test analog_to_digital_converter_test()
 		result.bool_test=FALSE;
  8017054:	2300      	movs	r3, #0
  8017056:	733b      	strb	r3, [r7, #12]
-		memcpy(result.msg , STR_ADC_FAIL,  strlen(STR_ADC_FAIL)+1);
+	    memcpy(result.msg , STR_ADC_FAIL,  strlen(STR_ADC_FAIL)+1);
  8017058:	f107 030c 	add.w	r3, r7, #12
  801705c:	3301      	adds	r3, #1
  801705e:	220a      	movs	r2, #10
