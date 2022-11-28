@@ -2,33 +2,36 @@
 #include "RTG.h"
 #include "tests.h"
 
+//check is the timer work good
 void timer_test( result_test*result)
 {
 
-int counter=0;
-	HAL_TIM_Base_Start_IT(TIM_2); //Initiate timer 2
-int new_TIM_counter,old_TIM_counter;
+	//init PSC_counter
+	int PSC_counter=PSC_COUNTER_INIT;
+
 	while (1)
 	{
 		if(time_flag_PeriodElapsedCallback==TRUE)
 		{
-			printf("\r\n counter-> %d \r\n",counter);
+			PSC_counter--;
 			time_flag_PeriodElapsedCallback=FALSE;
-		}
 
-		new_TIM_counter = __HAL_TIM_GET_COUNTER(TIM_2); //Get the TIM3 Counter Register value on runtime
-		if (new_TIM_counter < old_TIM_counter) //Check if period looped
-		{
-			counter=0;
+			if(PSC_counter==0)
+				break;
 		}
-		counter++;
-		old_TIM_counter = new_TIM_counter; //save old counter
 	}
 
+	//check how many Period elapsed
+	 if(PeriodElapsedCallback_couter==PSC_counter_expected)
+	 {
+		 result->bool_test=TRUE;
+		 memcpy(result->msg , STR_SUCCESS,  strlen(STR_SUCCESS)+1);
+	 }
+	 else
+	 {
+		 result->bool_test=FALSE;
+		 memcpy(result->msg , STR_FAIL_TIMER,  strlen(STR_FAIL_TIMER)+1);
 
-
-	result->bool_test=TRUE;
-	memcpy(result->msg , "Success",  8);
-
-
+	 }
 }
+

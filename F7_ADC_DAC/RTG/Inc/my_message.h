@@ -1,6 +1,8 @@
 #ifndef MY_MESSAGE_H_
 #define MY_MESSAGE_H_
 
+
+// my_message index features
 #define my_message_id_index 0
 #define my_message_Peripheral_index 1
 #define my_message_Iterations_index 2
@@ -9,7 +11,7 @@
 
 
 
-
+//struct for saving and send data between server and client
 typedef struct my_message
 
 {
@@ -21,7 +23,7 @@ typedef struct my_message
 
 } my_message;
 
-void my_message_toString();
+
 
 
 #endif /* INC_RTG_H_ */

@@ -2,12 +2,12 @@
 #include "my_message.h"
 
 flag_message_From_client=FALSE;
-//flag_message_From_client=TRUE;
+
 result_test result;
 
 my_message receive_client_message;
 
-
+//send the result to client
 void send_to_cient(my_message receive_client_message )
 {
 
@@ -16,16 +16,16 @@ void send_to_cient(my_message receive_client_message )
 	char buf[100];
 	uint8_t id;
 	printf("\r\n send data... \r\n");
-	buf[0]=receive_client_message.id;
-	buf[1]=receive_client_message.Peripheral;
-	buf[2]=receive_client_message.Iterations;
-	buf[3]=receive_client_message.length;
-	for (int i= 0,j=4; i <= receive_client_message.length; i++)
+	buf[my_message_id_index]=receive_client_message.id;
+	buf[my_message_Peripheral_index]=receive_client_message.Peripheral;
+	buf[my_message_Iterations_index]=receive_client_message.Iterations;
+	buf[my_message_length_index]=receive_client_message.length;
+	for (int i= 0,j=my_message_msg_index; i <= receive_client_message.length; i++)
 	{
 		buf[j++]=receive_client_message.msg[i];
 	}
 
-	addr_global->addr=16885952;
+	addr_global->addr=ADDR_;
 
 
 	/* allocate pbuf from RAM*/
@@ -48,18 +48,20 @@ void send_to_cient(my_message receive_client_message )
 	pbuf_free(p_global);
 }
 
+// handle Message From Client
 int handleMessageFromClient(struct pbuf *p)
 {
 	receive_client_message.id= *(uint8_t *)(p->payload + my_message_id_index);
 	receive_client_message.Peripheral= *(uint8_t *)(p->payload + my_message_Peripheral_index);
 	receive_client_message.Iterations= *(uint8_t *)(p->payload + my_message_Iterations_index);
 	receive_client_message.length= *(uint8_t *)(p->payload + my_message_length_index);
-
+	// save into buffer
 	memcpy(receive_client_message.msg , (p->payload + my_message_msg_index),  receive_client_message.length);
 
 	return my_message_msg_index+receive_client_message.length;
 }
 
+//run the correct test
 result_test  run_client_test(my_message receive_client_message)
 {
 	result_test result={FALSE,"ERROR"};
@@ -128,6 +130,7 @@ result_test  run_client_test(my_message receive_client_message)
 	return result;
 }
 
+//handle reception network
 void handle_reception_network()
 {
 	//Handles the actual reception of bytes from the network interface
@@ -135,13 +138,14 @@ void handle_reception_network()
 	//Handle which checks timeout expiration
 	sys_check_timeouts();
 
+	//got reception network
 	if(flag_message_From_client==TRUE)
 	{
 		result=run_client_test(receive_client_message);
 
 		receive_client_message.length=strlen(result.msg);
 		memcpy(receive_client_message.msg , result.msg,  receive_client_message.length );
-
+		//send client message
 		send_to_cient(receive_client_message  ) ;
 
 		flag_message_From_client=FALSE;
@@ -152,43 +156,4 @@ void handle_reception_network()
 
 
 
-//		receive_client_message.id=1;
-//		receive_client_message.Peripheral=2;
-//		receive_client_message.Iterations=2;
-//		receive_client_message.length=3;
-//		receive_client_message.msg[0]='A';
-//		receive_client_message.msg[1]='M';
-//		receive_client_message.msg[2]=0;
-
-
-//		receive_client_message.id=1;
-//		receive_client_message.Peripheral=8;
-//		receive_client_message.Iterations=2;
-//		receive_client_message.length=3;
-//		receive_client_message.msg[0]='A';
-//		receive_client_message.msg[1]='M';
-//		receive_client_message.msg[2]=0;
-
-//		receive_client_message.id=1;
-//		receive_client_message.Peripheral=16;
-//		receive_client_message.Iterations=2;
-//		receive_client_message.length=3;
-//		receive_client_message.msg[0]='A';
-//		receive_client_message.msg[1]='M';
-//		receive_client_message.msg[2]=0;
-
-//		receive_client_message.id=1;
-//		receive_client_message.Peripheral=1;
-//		receive_client_message.Iterations=2;
-//		receive_client_message.length=3;
-//		receive_client_message.msg[0]='A';
-//		receive_client_message.msg[1]='M';
-//		receive_client_message.msg[2]=0;
-//			receive_client_message.id=1;
-//			receive_client_message.Peripheral=4;
-//			receive_client_message.Iterations=2;
-//			receive_client_message.length=3;
-//			receive_client_message.msg[0]='A';
-//			receive_client_message.msg[1]='M';
-//			receive_client_message.msg[2]=0;
 

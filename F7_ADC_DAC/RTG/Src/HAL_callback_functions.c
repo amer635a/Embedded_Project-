@@ -4,19 +4,23 @@
 
 //Data for TRANSMINT
 
+//flags for UART interrput
 uint8_t receivere_UART5_flag_RxCpltCallback=FALSE;
 uint8_t receivere_UART4_flag_RxCpltCallback=FALSE;
 
 
+//flags for I2c interrput
 uint8_t flag_R_Master=FALSE;
 uint8_t	flag_R_slave=FALSE;
 
+//flags for adc interrput
 uint8_t flag_ADC_ConvCpltCallback=FALSE;
 
 uint8_t time_flag_PeriodElapsedCallback=FALSE;
 
+uint32_t PeriodElapsedCallback_couter=0;
 
-
+//data of udp
 ip_addr_t *addr_global;
 u32_t addr_int;
 u16_t port_global;
@@ -36,11 +40,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		receivere_UART4_flag_RxCpltCallback = TRUE;
 }
 
-
+/**
+  * @brief This function is called when Slave I2C completes receiving X bytes.
+  */
 void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c) {
 	flag_R_slave=TRUE;
 }
 
+/**
+  * @brief This function is called when Master I2C completes receiving X bytes.
+  */
 void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c) {
 	flag_R_Master=TRUE;
 
@@ -56,15 +65,20 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	time_flag_PeriodElapsedCallback=TRUE;
+	PeriodElapsedCallback_couter++;
 
 }
 
+/**
+  * @brief This function is called when udp receive Block.
+  */
 void udp_receive_callback(
 		void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
 	flag_message_From_client=TRUE;
 	/* Get the IP of the Client */
 	/* Get the IP of the Client */
+
 	addr_global=addr;
     remoteIP_global = ipaddr_ntoa(addr);
 
@@ -88,6 +102,8 @@ void udpServer_init(void) {
 	   udp_remove(upcb);
    }
 }
+
+
 
 
 

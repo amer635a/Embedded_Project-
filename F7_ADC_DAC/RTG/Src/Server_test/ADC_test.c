@@ -1,11 +1,13 @@
 #include "RTG.h"
 #include "tests.h"
 
+//test for check that analog to digital_converter in correct way
 result_test analog_to_digital_converter_test()
 {
 	result_test result;
 	uint32_t adcVal1;
 	uint32_t expected_adc_value=0;
+	int wrong_value=100;
 	 //	Enable ADC and start ADC conversion
 	 HAL_ADC_Start(ADC_1);
 	 //	Wait for ADC conversion to be completed
@@ -15,7 +17,7 @@ result_test analog_to_digital_converter_test()
 	  adcVal1 = HAL_ADC_GetValue(ADC_1);
 
 
-	if(expected_adc_value-100 > adcVal1 || adcVal1 > expected_adc_value+100 )
+	if(expected_adc_value-wrong_value > adcVal1 || adcVal1 > expected_adc_value+wrong_value )
 	{
 		result.bool_test=TRUE;
 		memcpy(result.msg , STR_SUCCESS,  strlen(STR_SUCCESS)+1 );

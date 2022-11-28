@@ -8,17 +8,20 @@ uint8_t data_buff_receiver1_Slave_I2C[SIZEOF_DATA_BUFF];
 
 
 
-
+//test for check transmit data on I2C protocol
 result_test test_transmit_receive_data_I2C(const char* data,uint8_t lenght)
 {
 	result_test result;
 	int waiting_counter=0;
 
+	//salve ready for receive data
 	HAL_I2C_Slave_Receive_DMA(I2C_SLAVE, &data_buff_receiver1_Slave_I2C, lenght);
+	//master ready for transmit data
 	HAL_I2C_Master_Transmit_DMA(I2C_MASTER, 44, data, lenght);
 
 	while (1)
 	{
+		//slave received data
 		if(flag_R_slave==TRUE)
 		{
 
@@ -34,6 +37,7 @@ result_test test_transmit_receive_data_I2C(const char* data,uint8_t lenght)
 			HAL_I2C_Slave_Transmit_DMA(I2C_SLAVE,data_buff_receiver1_Slave_I2C, lenght);
 			flag_R_slave=FALSE;
 		}
+		//master received data
 		if(flag_R_Master==TRUE)
 		{
 			if( check_data(data,data_buff_receiver_Master_I2C,lenght)==FALSE )
@@ -48,6 +52,7 @@ result_test test_transmit_receive_data_I2C(const char* data,uint8_t lenght)
 		}
 
 		HAL_Delay(10);
+		//check if its not taking long time to finish
 		if((++waiting_counter) > MAX_WAITING_COUNTER)
 		{
 			result.bool_test=FALSE;

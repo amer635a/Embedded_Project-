@@ -19,8 +19,8 @@ extern SPI_HandleTypeDef hspi2;
 #define UART_4 &huart4				    //Change to match your UART number
 #define UART_5 &huart5				    //Change to match your UART number
 
-
-
+#define PSC_COUNTER_INIT 4
+#define PSC_counter_expected 4
 extern DAC_HandleTypeDef hdac;
 extern ADC_HandleTypeDef hadc1;
 extern TIM_HandleTypeDef htim2;
@@ -65,6 +65,7 @@ extern uint8_t flag_R_Master;
 extern uint8_t	flag_R_slave;
 extern uint8_t flag_ADC_ConvCpltCallback;
 extern uint8_t time_flag_PeriodElapsedCallback;
+extern uint32_t PeriodElapsedCallback_couter ;
 
 extern uint8_t data_buff_transmint[SIZEOF_DATA_BUFF];
 extern uint8_t data_buff_receivere[SIZEOF_DATA_BUFF];
@@ -97,7 +98,7 @@ extern struct netif gnetif;	//Generic data structure used for all lwIP network i
 
 extern flag_message_From_client;
 
-
+// udp variable
 extern ip_addr_t *addr_global;
 extern u32_t addr_int;
 extern u16_t port_global;
@@ -105,6 +106,7 @@ extern struct pbuf *p_global;
 extern const char* remoteIP_global;
 extern struct pbuf *txBuf;
 extern struct udp_pcb *upcb_global;
+#define ADDR_ 16885952
 
 
 

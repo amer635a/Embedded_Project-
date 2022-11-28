@@ -1,11 +1,11 @@
 #include "RTG.h"
 
-
+//print the result of the test
 void print_result_test( result_test result){
 	printf("\r\n result -> %s \r\n", result.msg);
 }
 
-
+// checking the to data is equals
 uint8_t check_data(const char* data,const char* data_buff_receiver1,uint8_t lenght){
 
 	for (uint8_t i = 0; i < lenght ;i++ )
