@@ -2,27 +2,22 @@
 #include "RTG.h"
 #include "tests.h"
 
-//check is the timer work good
+
+/**
+  * @brief check is the timer work good
+  * @param result saving the result of test.
+  */
 void timer_test( result_test*result)
 {
+	//start timer 2 -> (0.5 second)
+	HAL_TIM_Base_Start_IT(TIM_2);
 
-	//init PSC_counter
-	int PSC_counter=PSC_COUNTER_INIT;
+	//delay for 1 second
+	HAL_Delay(ONE_SEC_DEALY_TIMER);
 
-	while (1)
-	{
-		if(time_flag_PeriodElapsedCallback==TRUE)
-		{
-			PSC_counter--;
-			time_flag_PeriodElapsedCallback=FALSE;
-
-			if(PSC_counter==0)
-				break;
-		}
-	}
 
 	//check how many Period elapsed
-	 if(PeriodElapsedCallback_couter==PSC_counter_expected)
+	 if(PeriodElapsedCallback_couter_timer2==PSC_COUNTER_2)
 	 {
 		 result->bool_test=TRUE;
 		 memcpy(result->msg , STR_SUCCESS,  strlen(STR_SUCCESS)+1);

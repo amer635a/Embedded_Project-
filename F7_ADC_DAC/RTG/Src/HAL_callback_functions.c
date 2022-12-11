@@ -8,6 +8,8 @@
 uint8_t receivere_UART5_flag_RxCpltCallback=FALSE;
 uint8_t receivere_UART4_flag_RxCpltCallback=FALSE;
 
+uint8_t receive_SPI_Master_flag_RxCpltCallback=FALSE;
+uint8_t receive_SPI_Slave_flag_RxCpltCallback=FALSE;
 
 //flags for I2c interrput
 uint8_t flag_R_Master=FALSE;
@@ -18,17 +20,19 @@ uint8_t flag_ADC_ConvCpltCallback=FALSE;
 
 uint8_t time_flag_PeriodElapsedCallback=FALSE;
 
-uint32_t PeriodElapsedCallback_couter=0;
+uint32_t PeriodElapsedCallback_couter_timer1=0;
+uint32_t PeriodElapsedCallback_couter_timer2=0;
 
 //data of udp
-ip_addr_t *addr_global;
+ip_addr_t  addr_global;
+
 u32_t addr_int;
 u16_t port_global;
 struct pbuf *p_global;
 const char* remoteIP_global;
 struct pbuf *txBuf;
 struct udp_pcb *upcb_global;
-
+u32_t addr_TRY_GOLABL;
 /**
   * @brief This function is called when *any* UART completes receiving X bytes.
   */
@@ -64,9 +68,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 // == Timer Callback ======================================
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	time_flag_PeriodElapsedCallback=TRUE;
-	PeriodElapsedCallback_couter++;
-
+	if(htim==TIM_2)
+		++PeriodElapsedCallback_couter_timer2;
 }
 
 /**
@@ -79,7 +82,9 @@ void udp_receive_callback(
 	/* Get the IP of the Client */
 	/* Get the IP of the Client */
 
-	addr_global=addr;
+
+	addr_TRY_GOLABL=addr->addr;
+
     remoteIP_global = ipaddr_ntoa(addr);
 
 	upcb_global=upcb;
@@ -87,7 +92,24 @@ void udp_receive_callback(
 	port_global=port;
 	p_global=p;
 
-	const int len =handleMessageFromClient(p);
+	handleMessageFromClient(p);
+
+}
+
+/**
+  * @brief This function is called when any SPI completes receiving X bytes.
+  */
+void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hspi) {
+
+	if (hspi == SPI_MASTER)
+	{
+		receive_SPI_Master_flag_RxCpltCallback=TRUE;
+	}
+	if (hspi == SPI_SLAVE)
+	{
+		receive_SPI_Slave_flag_RxCpltCallback=TRUE;
+	}
+
 }
 void udpServer_init(void) {
 	// UDP Control Block structure
@@ -102,6 +124,7 @@ void udpServer_init(void) {
 	   udp_remove(upcb);
    }
 }
+
 
 
 

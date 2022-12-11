@@ -46,34 +46,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := F7_ADC_DAC
+BUILD_ARTIFACT_NAME := Ameer_project
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-F7_ADC_DAC.elf \
+Ameer_project.elf \
 
 MAP_FILES += \
-F7_ADC_DAC.map \
+Ameer_project.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-F7_ADC_DAC.list \
+Ameer_project.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: F7_ADC_DAC.elf secondary-outputs
+main-build: Ameer_project.elf secondary-outputs
 
 # Tool invocations
-F7_ADC_DAC.elf F7_ADC_DAC.map: $(OBJS) $(USER_OBJS) C:\Users\ameer\git\Embedded_Project-\F7_ADC_DAC\STM32F746ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "F7_ADC_DAC.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\ameer\git\Embedded_Project-\F7_ADC_DAC\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="F7_ADC_DAC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Ameer_project.elf Ameer_project.map: $(OBJS) $(USER_OBJS) C:\Users\ameer\git\Embedded_Project-\F7_ADC_DAC\STM32F746ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Ameer_project.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\ameer\git\Embedded_Project-\F7_ADC_DAC\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ameer_project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -82,14 +82,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-F7_ADC_DAC.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "F7_ADC_DAC.list"
+Ameer_project.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Ameer_project.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) F7_ADC_DAC.elf F7_ADC_DAC.list F7_ADC_DAC.map default.size.stdout
+	-$(RM) Ameer_project.elf Ameer_project.list Ameer_project.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

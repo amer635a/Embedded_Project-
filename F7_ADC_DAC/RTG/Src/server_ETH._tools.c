@@ -1,7 +1,8 @@
 #include "RTG.h"
 #include "my_message.h"
+#include "tests.h"
 
-flag_message_From_client=FALSE;
+ flag_message_From_client=FALSE;
 
 result_test result;
 
@@ -13,9 +14,9 @@ void send_to_cient(my_message receive_client_message )
 
 
 	/* copy the data into the buffer  */
-	char buf[100];
-	uint8_t id;
-	printf("\r\n send data... \r\n");
+	char buf[SIZE_OF_BUFFER];
+
+	printf("\r\n send data to client ... \r\n");
 	buf[my_message_id_index]=receive_client_message.id;
 	buf[my_message_Peripheral_index]=receive_client_message.Peripheral;
 	buf[my_message_Iterations_index]=receive_client_message.Iterations;
@@ -25,15 +26,15 @@ void send_to_cient(my_message receive_client_message )
 		buf[j++]=receive_client_message.msg[i];
 	}
 
-	addr_global->addr=ADDR_;
+	 addr_global.addr=addr_TRY_GOLABL;
 
-
+	printf("addr_TRY_GOLABL 2 -> %d \r\n",addr_TRY_GOLABL);
 	/* allocate pbuf from RAM*/
-	txBuf = pbuf_alloc(PBUF_TRANSPORT,14, PBUF_RAM);
+	txBuf = pbuf_alloc(PBUF_TRANSPORT,SIZE_FIRST_ELEMENT_MY_MESSAGE+receive_client_message.length, PBUF_RAM);
 	/* copy the data into the buffer  */
-	pbuf_take(txBuf, buf, 14);
+	pbuf_take(txBuf, buf, SIZE_FIRST_ELEMENT_MY_MESSAGE+receive_client_message.length);
 	/* Connect to the remote client */
-	udp_connect(upcb_global, addr_global, port_global);
+	udp_connect(upcb_global, &addr_global, port_global);
 
 	/* Send a Reply to the Client */
 	udp_send(upcb_global, txBuf);
@@ -68,11 +69,11 @@ result_test  run_client_test(my_message receive_client_message)
 	uint8_t iteration=receive_client_message.Iterations;
 	switch(receive_client_message.Peripheral)
   	{
-	int result1 ;
+
   		case TEST_UART:
   			for (uint8_t i = 0; i < iteration ; i++)
   			{
-  				UART_tests(receive_client_message.msg,receive_client_message.length,receive_client_message.Iterations,&result);
+  				UART_tests(receive_client_message.msg,receive_client_message.length,&result);
   				if(result.bool_test ==FALSE )
   					return result;
   			}
@@ -84,7 +85,7 @@ result_test  run_client_test(my_message receive_client_message)
 
   			for (uint8_t i = 0; i < iteration ; i++)
   			{
-  				I2C_tests(receive_client_message.msg,receive_client_message.length,receive_client_message.Iterations,&result);
+  				I2C_tests(receive_client_message.msg,receive_client_message.length,&result);
   			  	if(result.bool_test ==FALSE )
   			  		return result;
   			}
@@ -97,7 +98,7 @@ result_test  run_client_test(my_message receive_client_message)
   		  	{
   		  		SPI_tests(receive_client_message.msg,receive_client_message.length,receive_client_message.Iterations,&result);
   		  		if(result.bool_test ==FALSE )
-  		  		return result;
+  		  			return result;
   		  	}
   		  	print_result_test(result);
   		  	return result;
@@ -124,6 +125,7 @@ result_test  run_client_test(my_message receive_client_message)
   		  			 return result;
   		default:
 
+  			memcpy(result.msg , STR_INVALID_INPUT_PERIPHERAL,   strlen(STR_INVALID_INPUT_PERIPHERAL)+1);
   			break;
   	}
 
@@ -141,12 +143,14 @@ void handle_reception_network()
 	//got reception network
 	if(flag_message_From_client==TRUE)
 	{
+
 		result=run_client_test(receive_client_message);
 
 		receive_client_message.length=strlen(result.msg);
-		memcpy(receive_client_message.msg , result.msg,  receive_client_message.length );
+		memcpy(receive_client_message.msg , result.msg,receive_client_message.length );
 		//send client message
-		send_to_cient(receive_client_message  ) ;
+
+	 	send_to_cient(receive_client_message ) ;
 
 		flag_message_From_client=FALSE;
 	}

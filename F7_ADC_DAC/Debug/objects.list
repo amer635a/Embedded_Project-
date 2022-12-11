@@ -124,4 +124,5 @@
 "./RTG/Src/Server_test/I2C_test.o"
 "./RTG/Src/Server_test/SPI_test.o"
 "./RTG/Src/Server_test/UART_test.o"
+"./RTG/Src/Server_test/Unit_test.o"
 "./RTG/Src/Server_test/timer_test.o"

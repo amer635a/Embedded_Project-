@@ -1,4 +1,0 @@
-../RTG/Src/server_ETH._tools.c:11:6:send_to_cient	120	static
-../RTG/Src/server_ETH._tools.c:52:5:handleMessageFromClient	16	static
-../RTG/Src/server_ETH._tools.c:65:14:run_client_test	136	static
-../RTG/Src/server_ETH._tools.c:134:6:handle_reception_network	136	static

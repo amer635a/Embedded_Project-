@@ -1,13 +1,15 @@
 #include "RTG.h"
 #include "tests.h"
 
-//test for check that analog to digital_converter in correct way
-result_test analog_to_digital_converter_test()
+/**
+  * @brief   test ADC if can convert analog to digital using ground .
+  * @note   can add multiple tests for test ADC.
+  *
+  */
+void analog_to_digital_converter_test(result_test*result )
 {
-	result_test result;
 	uint32_t adcVal1;
-	uint32_t expected_adc_value=0;
-	int wrong_value=100;
+
 	 //	Enable ADC and start ADC conversion
 	 HAL_ADC_Start(ADC_1);
 	 //	Wait for ADC conversion to be completed
@@ -17,22 +19,31 @@ result_test analog_to_digital_converter_test()
 	  adcVal1 = HAL_ADC_GetValue(ADC_1);
 
 
-	if(expected_adc_value-wrong_value > adcVal1 || adcVal1 > expected_adc_value+wrong_value )
+	  // check ADC value
+	if( MIN_EXPECTED_ADC<= adcVal1 && adcVal1 <= MAX_EXPECTED_ADC )
 	{
-		result.bool_test=TRUE;
-		memcpy(result.msg , STR_SUCCESS,  strlen(STR_SUCCESS)+1 );
+		//true case
+		result->bool_test=TRUE;
+		memcpy(result->msg , STR_SUCCESS,  strlen(STR_SUCCESS)+1 );
+		return;
 	}
 	else
 	{
-		result.bool_test=FALSE;
-	    memcpy(result.msg , STR_ADC_FAIL,  strlen(STR_ADC_FAIL)+1);
+		//false case
+		result->bool_test=FALSE;
+	    memcpy(result->msg , STR_ADC_FAIL,  strlen(STR_ADC_FAIL)+1);
+	    return;
 	}
-	return result;
+
 }
 
 
-
+/**
+  * @brief function for run ADC tests.
+  * @note   can add multiple tests for test ADC.
+  *         Save the result on result variable
+  */
 void ADC_tests( result_test*result)
 {
-	*result=analog_to_digital_converter_test();
+	 analog_to_digital_converter_test(result);
 }

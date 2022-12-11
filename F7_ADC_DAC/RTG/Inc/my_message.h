@@ -8,8 +8,7 @@
 #define my_message_Iterations_index 2
 #define my_message_length_index 3
 #define my_message_msg_index 4
-
-
+#define SIZE_OF_BUFFER 100
 
 //struct for saving and send data between server and client
 typedef struct my_message
@@ -19,7 +18,7 @@ typedef struct my_message
         uint8_t Peripheral;
         uint8_t Iterations;
         uint8_t length ;
-        uint8_t  msg[50];
+        uint8_t  msg[SIZE_OF_BUFFER];
 
 } my_message;
 

@@ -2,6 +2,21 @@
 #define TESTS_
 
 // status of the tests
+#define WRONG_VALUE 100
+
+#define MIN_EXPECTED_ADC 0
+#define	MAX_EXPECTED_ADC 100
+
+
+#define ONE_SEC_DEALY_TIMER 1000
+#define  EXTRA_TIME_TIMER_TEST 10
+#define PSC_COUNTER_2 2
+
+#define TIMEOUT_TIME_100 100
+
+#define DEFAULT_TRANSMIT_NUMBER 1000
+#define TEST_TYPE_DEFAULT_VALUE -1
+
 
 #define STR_SUCCESS  "success !!!"
 
@@ -25,6 +40,6 @@
 
 #define STR_FAIL_TIMER "Fail- timer not working as expected"
 
-
+#define STR_INVALID_INPUT_PERIPHERAL  "invalid input-Peripheral "
 
 #endif /* INC_RTG_H_ */
